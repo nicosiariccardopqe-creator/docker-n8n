@@ -1,10 +1,5 @@
 FROM n8nio/n8n:latest
 
-ENV NODE_ENV=production \
-    N8N_TRUST_PROXY=true \
-    N8N_PORT=5678 \
-    GENERIC_TIMEZONE=Europe/Rome
-
 EXPOSE 5678
 
 STOPSIGNAL SIGTERM
