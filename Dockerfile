@@ -1,4 +1,4 @@
-FROM n8nio/n8n:latest
+FROM n8nio/n8n:1.25.2
 
 ENV NODE_ENV=production
 
