@@ -1,0 +1,121 @@
+{
+  "name": "Test pec wa",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyHour"
+            }
+          ]
+        },
+        "filters": {
+          "q": "ingpec",
+          "readStatus": "unread"
+        }
+      },
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -64,
+        -112
+      ],
+      "id": "0ed4f30c-7342-4869-8ac7-6055a9962476",
+      "name": "Gmail Trigger",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EEY2e0X80NgF6eRc",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0AA196BGQG",
+          "mode": "list",
+          "cachedResultName": "all-n8n"
+        },
+        "text": "=Hai ricevuto un messaggio PEC da: {{ $json.From }} Con oggetto: {{ $json.Subject }} ",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.4,
+      "position": [
+        144,
+        -112
+      ],
+      "id": "339a23d4-a66a-49e2-b502-05065e84b1a3",
+      "name": "Send a message",
+      "webhookId": "a5acd178-3fc5-4044-b9de-eabbfed02310",
+      "credentials": {
+        "slackOAuth2Api": {
+          "id": "pkoyOjgMeeyb3ZAD",
+          "name": "Slack account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('Gmail Trigger').item.json.id }}"
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        352,
+        -112
+      ],
+      "id": "2d120c0c-4a85-494d-b21d-2341fb829372",
+      "name": "Mark a message as read",
+      "webhookId": "5f2d4cc5-d562-4d31-8225-3d465745b0ec",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EEY2e0X80NgF6eRc",
+          "name": "Gmail account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Mark a message as read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "49b8eb79-8272-439c-be66-84ef12ad8f7f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "52cbb09a61d869832a0e0de9f5b3841ef3c3e8048bb8b0fa629a500855694fae"
+  },
+  "id": "rwh1XjMdmEU7mksI_J0Fw",
+  "tags": []
+}

@@ -1,0 +1,348 @@
+{
+  "name": "Agent AI Tutorial",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        48,
+        32
+      ],
+      "id": "87c5a852-9aaf-4501-8a85-3d2df45cacb5",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "1erQjc0Gz6kYD_BfXXk-13-PRXHw7NkAN",
+          "mode": "list",
+          "cachedResultName": "Checklist_conformita_AI_AgID_NIS2.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1erQjc0Gz6kYD_BfXXk-13-PRXHw7NkAN/view?usp=drivesdk"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        272,
+        32
+      ],
+      "id": "cdfa32f1-25aa-46c2-91dc-3740f21c1df5",
+      "name": "Download file"
+    },
+    {
+      "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n-test",
+          "mode": "list",
+          "cachedResultName": "n8n-test"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        528,
+        32
+      ],
+      "id": "1077c11d-3e00-46a6-acf6-3a9abc60637c",
+      "name": "Pinecone Vector Store"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        496,
+        256
+      ],
+      "id": "25dff6a9-2d57-4b4d-8156-3f22161e9f67",
+      "name": "Embeddings OpenAI"
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        624,
+        256
+      ],
+      "id": "5ea68bba-b345-4340-9c57-1d5a07db60e2",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        704,
+        464
+      ],
+      "id": "226488c4-56ad-478b-927c-4253495b40cf",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        1184,
+        48
+      ],
+      "id": "393c58d7-8826-4cef-be1b-12ed880e9aaa",
+      "name": "When chat message received",
+      "webhookId": "926869a5-983a-4d4b-8035-52b0718bd8be"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "=Sei un agente che risponde alle domande dell'utente in maniera professionale riguardo BJ Real Estater* un'agenzia immobiliare. Input: {{ $json.chatInput }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1440,
+        48
+      ],
+      "id": "4b95147e-f6f0-4f32-a0ee-713257923248",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4.1-nano",
+          "mode": "list",
+          "cachedResultName": "gpt-4.1-nano"
+        },
+        "responsesApiEnabled": "=",
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1392,
+        272
+      ],
+      "id": "cbdeb43a-cfaf-48f0-9ce2-1cedad96be55",
+      "name": "OpenAI Chat Model"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        1552,
+        320
+      ],
+      "id": "80d8dc12-4caf-49c8-82f4-8264b5ee0eed",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "mode": "retrieve-as-tool",
+        "toolDescription": "Recuper informazioni relative a problemi di assistenza clienti per rispondere alle domande frequenti FAQs",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "n8n-test",
+          "mode": "list",
+          "cachedResultName": "n8n-test"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        1728,
+        272
+      ],
+      "id": "9da7605e-a2bd-4077-896a-79968df26586",
+      "name": "Pinecone Vector Store1"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.embeddingsOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        1728,
+        480
+      ],
+      "id": "7a02afc0-050d-40ea-a806-0292a4735286",
+      "name": "Embeddings OpenAI1"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 624,
+        "width": 1056
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        1088,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "e2232887-5e64-4253-ba75-0c6a6be90130",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "",
+        "height": 624,
+        "width": 1008,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        0,
+        0
+      ],
+      "typeVersion": 1,
+      "id": "bb1aa6f1-a5e7-43f2-9fa5-899ff354dc1f",
+      "name": "Sticky Note1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Default Data Loader": {
+      "ai_document": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "ai_document",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Pinecone Vector Store1": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Embeddings OpenAI1": {
+      "ai_embedding": [
+        [
+          {
+            "node": "Pinecone Vector Store1",
+            "type": "ai_embedding",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "7fe97e05-b594-444c-9487-4489e1e6c6d9",
+  "meta": {
+    "instanceId": "5bf5cd82a9f21d2f9f124733db251dff4decb3a677c5e18323faffc33471274e"
+  },
+  "id": "gFXU1EJiPpjdeFGeTvnUS",
+  "tags": []
+}

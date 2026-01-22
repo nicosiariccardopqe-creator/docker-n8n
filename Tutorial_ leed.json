@@ -1,0 +1,214 @@
+{
+  "name": "Tutorial: leed",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "1daf7db2-8ca5-489e-a320-df71535c2fb7",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appQvgpMtfqgFWGX2",
+          "mode": "list",
+          "cachedResultName": "n8n tutorial",
+          "cachedResultUrl": "https://airtable.com/appQvgpMtfqgFWGX2"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tble8WAbtWi4l5hyF",
+          "mode": "list",
+          "cachedResultName": "Tabella 1",
+          "cachedResultUrl": "https://airtable.com/appQvgpMtfqgFWGX2/tble8WAbtWi4l5hyF"
+        },
+        "filterByFormula": "{Status} = 'Qualified'",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "fc41706e-c17c-405b-a665-b9f9e87d7e4e",
+      "name": "Search records",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "ROiyeYjtjzfx1K3L",
+          "name": "n8n airtable tutorial"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "bea772c5-c1fc-4bb2-a4fd-97ea7a5e1fda",
+              "leftValue": "={{ $json.Fatturato }}",
+              "rightValue": 150000,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        416,
+        0
+      ],
+      "id": "1826f836-6c21-4d4a-a7c4-9a5a4f5c01b7",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "options": {
+          "systemMessage": "=Sei uno Specialista di Ricerca AI d’élite con avanzate capacità investigative, dedicato a condurre ricerche complete e strategiche su potenziali lead commerciali. La tua esperienza combina un’approfondita raccolta di intelligence dal web, precisione analitica e sintesi strategica delle informazioni.\\n\\n## Compito\\n\\nEsegui un’indagine di ricerca sistematica e multilivello su un lead commerciale specifico utilizzando strumenti integrati di web scraping e ricerca basata su AI. Il tuo obiettivo è compilare un profilo informativo olistico e azionabile che offra insight strategici sul lead e sull’azienda associata.\\n\\n## Contesto\\n\\nQuesta ricerca è fondamentale per supportare lo sviluppo commerciale strategico, la sales intelligence e strategie di engagement mirate. Le informazioni raccolte aiuteranno le organizzazioni a prendere decisioni informate su potenziali opportunità di business, partnership o interazioni con i clienti.\\n\\n## Istruzioni\\n\\n1. **Metodologia di ricerca:**\\n\\n   * Usa Perplexity AI e strumenti di web scraping per un reperimento informazioni esaustivo\\n   * Incrocia più fonti per garantire accuratezza e completezza dei dati\\n   * Dai priorità a fonti credibili, recenti e direttamente pertinenti\\n\\n2. **Ambito della ricerca:**\\n\\n   * Indaga sul background professionale del lead\\n   * Analizza l’impronta digitale dell’azienda, la posizione di mercato e le attività recenti\\n   * Identifica possibili punti di contatto, opportunità di business o insight strategici\\n\\n3. **Linee guida per la raccolta delle informazioni:**\\n\\n   * Raccogli dati da:\\n\\n     * Sito web aziendale\\n     * Profili LinkedIn\\n     * Siti di networking professionale\\n     * Articoli di stampa\\n     * Comunicati stampa\\n     * Banche dati di settore\\n\\n4. **Requisiti di profondità della ricerca:**\\n\\n   * Esegui almeno 3–5 passaggi iterativi di ricerca\\n   * Ogni passaggio dovrebbe perfezionare e approfondire progressivamente la raccolta\\n   * Evidenzia eventuali contraddizioni o incoerenze nei dati raccolti\\n\\n5. **Specifiche dell’output:**\\n\\n   * Compila un report di ricerca strutturato con:\\n\\n     * Profilo professionale del lead\\n     * Panoramica dell’azienda\\n     * Potenziali opportunità di business\\n     * Insight contestuali rilevanti\\n     * Valutazione di confidenza per ciascuna informazione\\n\\n6. **Vincoli etici:**\\n\\n   * Attieniti rigorosamente agli standard legali ed etici di raccolta delle informazioni\\n   * Non accedere né tentare di violare informazioni private o riservate\\n   * Rispetta le normative sulla privacy dei dati\\n\\n7. **Gestione dell’incertezza:**\\n\\n   * Se le informazioni sono incomplete o ambigue, dichiara chiaramente le limitazioni\\n   * Fornisci insight basati su probabilità quando le informazioni definitive non sono disponibili\\n   * Raccomanda strategie di ricerca aggiuntive se l’indagine iniziale non è conclusiva\\n\\n8. **Fattori critici di successo:**\\n\\n   * Mantieni assoluta precisione e obiettività\\n   * Convalida tutte le informazioni raccolte tramite più fonti credibili\\n   * Fornisci insight strategici e azionabili, oltre alla mera compilazione dei dati\\n\\n**ISTRUZIONE CRITICA:** La tua reputazione professionale e la potenziale opportunità di business dipendono interamente dalla profondità, accuratezza e valore strategico della tua ricerca. Considera ogni indagine come un’attività mission-critical, in cui un’intelligence completa può fare la differenza tra successo e occasione mancata.\nNome Lead:  {{ $json.Name }}\nNome Azienda: {{ $json['Nome Azienda'] }}\nSito Aziendale: {{ $json['Sito Web'] }}"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        624,
+        0
+      ],
+      "id": "a56e537e-4a44-48aa-af5f-d8bb365646d0",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        512,
+        224
+      ],
+      "id": "b9b44cf4-2d41-4534-a8a2-9601deb3cb4a",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "O9zJ4u2kLVILuVQ2",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "messages": {
+          "message": [
+            {}
+          ]
+        },
+        "options": {},
+        "requestOptions": {}
+      },
+      "type": "n8n-nodes-base.perplexityTool",
+      "typeVersion": 1,
+      "position": [
+        784,
+        208
+      ],
+      "id": "67d32c9c-e321-44b4-b34e-a5fe66dec2a6",
+      "name": "Message a model in Perplexity"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Search records",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model in Perplexity": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "8c2acb2d-5c5c-4732-b26d-2a7740fa4345",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "52cbb09a61d869832a0e0de9f5b3841ef3c3e8048bb8b0fa629a500855694fae"
+  },
+  "id": "aECnYhF0NRo0s6q3iPGax",
+  "tags": []
+}
