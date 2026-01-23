@@ -3,6 +3,35 @@
   "nodes": [
     {
       "parameters": {
+        "path": "b0d829e1-def1-477b-807d-db284df5d402",
+        "options": {
+          "responseData": "{   \"status\": \"ok\" }",
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        368,
+        -400
+      ],
+      "id": "edd8d738-7730-42dc-9dbb-0d3e3514a34d",
+      "name": "Test pec wa Hook",
+      "webhookId": "b0d829e1-def1-477b-807d-db284df5d402",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "retryOnFail": true,
+      "onError": "continueRegularOutput"
+    },
+    {
+      "parameters": {
         "pollTimes": {
           "item": [
             {
@@ -18,14 +47,14 @@
       "type": "n8n-nodes-base.gmailTrigger",
       "typeVersion": 1.3,
       "position": [
-        128,
-        -112
+        224,
+        -176
       ],
-      "id": "88c93c35-68eb-4a29-9333-bdbb40a308f5",
+      "id": "6e65ec94-da9a-4def-a303-49d45acd139d",
       "name": "Gmail Trigger",
       "credentials": {
         "gmailOAuth2": {
-          "id": "rtDUa7IQPnAXutlX",
+          "id": "Srqa1GQ94T3gBvDf",
           "name": "Gmail account"
         }
       }
@@ -44,16 +73,16 @@
       "type": "n8n-nodes-base.slack",
       "typeVersion": 2.4,
       "position": [
-        336,
-        -112
+        432,
+        -176
       ],
-      "id": "92b2326d-f5c3-4fb9-96a9-e8a366dff219",
+      "id": "2fe40f6b-57b4-4ad3-8f87-dcbd78fcc18d",
       "name": "Send a message",
       "webhookId": "a5acd178-3fc5-4044-b9de-eabbfed02310",
       "credentials": {
         "slackApi": {
-          "id": "4dlx3nhLcmR80taJ",
-          "name": "Slack account 2"
+          "id": "gDjXmK95e6L4Ar6k",
+          "name": "Slack account"
         }
       }
     },
@@ -65,15 +94,15 @@
       "type": "n8n-nodes-base.gmail",
       "typeVersion": 2.2,
       "position": [
-        544,
-        -112
+        640,
+        -176
       ],
-      "id": "8f453959-f115-4480-b4e2-7185328db3e5",
+      "id": "09ea857f-377a-447d-a310-0a0376179924",
       "name": "Mark a message as read",
       "webhookId": "5f2d4cc5-d562-4d31-8225-3d465745b0ec",
       "credentials": {
         "gmailOAuth2": {
-          "id": "rtDUa7IQPnAXutlX",
+          "id": "Srqa1GQ94T3gBvDf",
           "name": "Gmail account"
         }
       }
@@ -81,6 +110,11 @@
   ],
   "pinData": {},
   "connections": {
+    "Test pec wa Hook": {
+      "main": [
+        []
+      ]
+    },
     "Gmail Trigger": {
       "main": [
         [
@@ -106,14 +140,13 @@
   },
   "active": false,
   "settings": {
-    "executionOrder": "v1",
-    "availableInMCP": false
+    "executionOrder": "v1"
   },
-  "versionId": "0564d866-bfc4-48a3-b091-51223b9d41f0",
+  "versionId": "2beb73ea-fd00-4873-87a8-6f3935976808",
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "a6775653f12dfbbae3fa74f2033c99bcc87973d157dc6c51fc1d74d8d63a2187"
+    "instanceId": "07c9ca20cd450a926dfb5f41fd570a2e72cac9cd0cfb4fbcae8acdee70032c85"
   },
-  "id": "bDULW2ZhabjOtlbsxxgCY",
+  "id": "8n6UktkYJWwnbrW7",
   "tags": []
 }
